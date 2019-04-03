@@ -48,60 +48,60 @@ function uploadScale() {
 }
 
 
-//draw boxes and labels on each detected object
-function drawBoxes(objects) {
+// //draw boxes and labels on each detected object
+// function drawBoxes(objects) {
 
-    //clear the previous drawings
-    drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+//     //clear the previous drawings
+//     drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-    //filter out objects that contain a class_name and then draw boxes and labels on each
-    objects.forEach(face => {
-        let scale = uploadScale();
-        let _x = face.x / scale;
-        let y = face.y / scale;
-        let width = face.w / scale;
-        let height = face.h / scale;
-        //flip the x axis if local video is mirrored
-        if (mirror) {
-            x = drawCanvas.width - (_x + width)
-        } else {
-            x = _x
-        }
+//     //filter out objects that contain a class_name and then draw boxes and labels on each
+//     objects.forEach(face => {
+//         let scale = uploadScale();
+//         let _x = face.x / scale;
+//         let y = face.y / scale;
+//         let width = face.w / scale;
+//         let height = face.h / scale;
+//         //flip the x axis if local video is mirrored
+//         if (mirror) {
+//             x = drawCanvas.width - (_x + width)
+//         } else {
+//             x = _x
+//         }
 
-        let rand_conf = face.confidence.toFixed(2);
-        let title = "" + rand_conf + "";
-        if (face.name != "unknown") {
-            drawCtx.strokeStyle = "magenta";
-            drawCtx.fillStyle = "magenta";
-            title += ' - ' + face.name
-            if (face.predict_proba > 0.0 ) {
-                title += "[" + face.predict_proba.toFixed(2) + "]";
-            }
-        } else {
-            drawCtx.strokeStyle = "cyan";
-            drawCtx.fillStyle = "cyan";
-        }
-        drawCtx.fillText(title , x + 5, y - 5);
-        drawCtx.strokeRect(x, y, width, height);
+//         let rand_conf = face.confidence.toFixed(2);
+//         let title = "" + rand_conf + "";
+//         if (face.name != "unknown") {
+//             drawCtx.strokeStyle = "magenta";
+//             drawCtx.fillStyle = "magenta";
+//             title += ' - ' + face.name
+//             if (face.predict_proba > 0.0 ) {
+//                 title += "[" + face.predict_proba.toFixed(2) + "]";
+//             }
+//         } else {
+//             drawCtx.strokeStyle = "cyan";
+//             drawCtx.fillStyle = "cyan";
+//         }
+//         drawCtx.fillText(title , x + 5, y - 5);
+//         drawCtx.strokeRect(x, y, width, height);
 
-        if(isCaptureExample && examplesNum < maxExamples) {
-            console.log("capure example: ", examplesNum)
+//         if(isCaptureExample && examplesNum < maxExamples) {
+//             console.log("capure example: ", examplesNum)
 
-            //Some styles for the drawcanvas
-            exCtx.drawImage(imageCanvas,
-                face.x, face.y, face.w, face.h,
-                examplesNum * exampleSize, 0,
-                exampleSize, exampleSize);
+//             //Some styles for the drawcanvas
+//             exCtx.drawImage(imageCanvas,
+//                 face.x, face.y, face.w, face.h,
+//                 examplesNum * exampleSize, 0,
+//                 exampleSize, exampleSize);
 
-            examplesNum += 1;
+//             examplesNum += 1;
 
-            if(examplesNum == maxExamples) {
-                stopCaptureExamples();
-            }
-        }
+//             if(examplesNum == maxExamples) {
+//                 stopCaptureExamples();
+//             }
+//         }
 
-    });
-}
+//     });
+// }
 
 //Add file blob to a form and post
 function postFile(file) {
