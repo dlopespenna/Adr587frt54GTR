@@ -9,6 +9,7 @@ var isOnDiv = false;
 var time = [];
 var screen_height = [];
 var screen_width = [];
+var count = 0;
 
 
 (function() {
@@ -69,6 +70,7 @@ var screen_width = [];
             }
             xhr.send(json);
         }
+        count += 1;
     }
 })();
 
